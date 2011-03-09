@@ -15,15 +15,15 @@
 
     <script type="text/javascript" src="EventDispacher.js"></script>
     <script type="text/javascript">
-      function testHandler(eventName, target) {
-        console.log("event handler excuted", eventName, target);
+      function testHandler(eventName, target, event) {
+        console.log("event handler excuted", eventName, target, event.message);
       }
 
       var cat = {};
       EventDispacher.initialize(cat);//initialize
       cat.addEventListener("run", this, testHandler);//add event
       cat.addEventListener("run", this, testHandler);//test for duplication
-      cat.dispatchEvent("run");//fire event
+      cat.dispatchEvent("run", {message: "run now"});//fire event
       cat.removeEventListener("run", this, testHandler);//remove event
       cat.dispatchEvent("run");//handler may not fire
     </script>

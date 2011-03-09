@@ -3,7 +3,7 @@
  *  (c) Hideaki Tanabe <http://blog.kaihatsubu.com>
  *  Licensed under the MIT License.
  */
-var EventDispacher = (function() {
+(function(window) {
 
   /**
    *  internal EventDispacher object
@@ -12,12 +12,13 @@ var EventDispacher = (function() {
     /**
      *  dispatch event
      *  @param name event name
+     *  @param eventObject custom event object
      */
-    dispatchEvent: function(name) {
+    dispatchEvent: function(name, eventObject) {
       //console.log("dispatchEvent", name);
       var listeners = this.__events[name];
       for (var i = 0, length = listeners.length; i < length; i++) {
-        listeners[i].handler.apply(listeners[i].thisObject, [name, this]);
+        listeners[i].handler.apply(listeners[i].thisObject, [name, this, eventObject]);
       }
     },
 
@@ -83,5 +84,5 @@ var EventDispacher = (function() {
     target.__events = {};
   };
 
-  return EventDispacher;
-})();
+  window.EventDispacher = EventDispacher;
+})(window);

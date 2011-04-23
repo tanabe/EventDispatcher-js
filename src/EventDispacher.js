@@ -6,9 +6,9 @@
 (function(window) {
 
   /**
-   *  internal EventDispacher object
+   *  internal EventDispatcher object
    */
-  var EventDispacher = {
+  var EventDispatcher = {
     /**
      *  dispatch event
      *  @param name event name
@@ -77,12 +77,12 @@
    *  add methods for specified object
    *  @param target
    */
-  EventDispacher.initialize = function(target) {
+  EventDispatcher.initialize = function(target) {
     target.dispatchEvent = this.dispatchEvent;
     target.addEventListener = this.addEventListener;
     target.removeEventListener = this.removeEventListener;
     target.__events = {};
   };
 
-  window.EventDispacher = EventDispacher;
+  window.EventDispatcher = EventDispatcher;
 })(window);

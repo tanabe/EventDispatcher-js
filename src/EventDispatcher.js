@@ -1,7 +1,12 @@
 /**
- *  Custom Event Dispacher
+ *  Custom Event Dispatcher
  *  (c) Hideaki Tanabe <http://blog.kaihatsubu.com>
  *  Licensed under the MIT License.
+ *
+ *  usage:
+ *  EventDispatcher.initialize(object);
+ *  object.addEventListener("doSomething", this, theHandler);
+ *  object.dispatchEvent("doSomething");//theHandler fired
  */
 (function(window) {
 
@@ -9,10 +14,13 @@
    *  internal EventDispatcher object
    */
   var EventDispatcher = {
+
     /**
-     *  dispatch event
-     *  @param name event name
-     *  @param eventObject custom event object
+     * dispatch event
+     * @name dispatchEvent
+     * @function
+     * @param name event name
+     * @param eventObject event object
      */
     dispatchEvent: function(name, eventObject) {
       //console.log("dispatchEvent", name);
@@ -23,10 +31,12 @@
     },
 
     /**
-     *  add event listener
-     *  @param name event name
-     *  @param thisObject scope of handler
-     *  @param handler event handler function
+     * add event listener 
+     * @name addEventListener
+     * @function
+     * @param name event name
+     * @param thisObject scope of handler
+     * @param handler event handler function
      */
     addEventListener: function(name, thisObject, handler) {
       //console.log("addEventListener", name, thisObject, handler);
@@ -42,10 +52,12 @@
     },
 
     /**
-     *  remove event listener
-     *  @param name event name
-     *  @param thisObject scope of handler
-     *  @param handler event handler function
+     * 
+     * @name removeEventListener
+     * @function
+     * @param name event name
+     * @param thisObject scope of handler
+     * @param handler event handler function
      */
     removeEventListener: function(name, thisObject, handler) {
       //console.log("removeEventListener", this);
@@ -58,11 +70,13 @@
   };
 
   /**
-   *  return index of specified event handler
-   *  @param name event name
-   *  @param thisObject scope of handler
-   *  @param handler event handler function
-   *  @return index
+   * return index of specified event handler
+   * @name indexOfEventListener
+   * @function
+   * @param listeners event listeners
+   * @param thisObject scope if handler
+   * @param handler event handler function
+   * @return index
    */
   var indexOfEventListener = function(listeners, thisObject, handler) {
     for (var i = 0, length = listeners.length; i < length; i++) {
@@ -74,8 +88,10 @@
   };
 
   /**
-   *  add methods for specified object
-   *  @param target
+   * add methods for specified object
+   * @name initialize
+   * @function
+   * @param target 
    */
   EventDispatcher.initialize = function(target) {
     target.dispatchEvent = this.dispatchEvent;
@@ -84,5 +100,6 @@
     target.__events = {};
   };
 
+  //assign to window
   window.EventDispatcher = EventDispatcher;
 })(window);

@@ -25,6 +25,9 @@
     dispatchEvent: function(name, eventObject) {
       //console.log("dispatchEvent", name);
       var listeners = this.__events[name];
+      if (!listeners) {
+        return;
+      }
       for (var i = 0, length = listeners.length; i < length; i++) {
         listeners[i].handler.apply(listeners[i].thisObject, [name, this, eventObject]);
       }
